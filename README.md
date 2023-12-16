@@ -5,9 +5,9 @@ A project for the full stack developer.
 
 ## Screenshots
 
-![Login Screen](.screenshots/login_ss.png)
-![Sign Up Screen](.screenshots/signup_ss.png)
-![Main Screen](.screenshots/main_screen_ss.png)
+![Login Screen](./screenshots/login_ss.png)
+![Sign Up Screen](./screenshots/signup_ss.png)
+![Main Screen](./screenshots/main_screen_ss.png)
 
 
 ## Demo
