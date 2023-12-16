@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Gifcard from "./Gifcard";
 import axios from "axios";
@@ -10,24 +10,34 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  const onSearchInputChange = async (event) => {
-    setSearchKeyword(event.target.value);
+  const getData = async (keyword)=>{
+    const data = await axios
+    .post("/api/gifs", { searchKeyword:keyword })
+    .then((res) => res.data)
+    return data
+  }
+
+  const onSearchInputChange = async (keyword) => {
     try {
       setLoading(true);
-      const data = await axios
-        .post("/api/gifs", { searchKeyword })
-        .then((res) => {setData(res.data)})
+        const data = await getData(keyword);
+        setData(data)
       setLoading(false);
-      console.log(loading);
     } catch (error) {
       console.log("error");
     }
   };
 
-  const onSearch = (event) => {};
+  const onSearch = async(event) => {
+    const data = await getData(searchKeyword);
+    setData(data)
+  };
+
+  
+
 
   return (
-    <div className="w-screen p-4 rounded-xl drop-shadow-2xl bg-white mt-10 mx-32">
+    <div className="w-screen p-4 rounded-xl drop-shadow-2xl bg-white mt-7 mx-32 z-1">
       <div className="flex flex-row items-center justify-center gap-x-4">
         <div className="flex-grow flex items-center bg-inputBox rounded-lg">
           <FaSearch className="text-2xl text-black mx-2" />
@@ -36,7 +46,9 @@ const Search = () => {
             px-2  bg-transparent p-5 rounded-lg  focus:border-black-400 placeholder:text-black-400 placeholder:font-bold"
             type="text"
             value={searchKeyword}
-            onChange={onSearchInputChange}
+            onChange={(e)=>{
+              setSearchKeyword(e.target.value);
+              onSearchInputChange(e.target.value)}}
             id="searchText"
             placeholder="Enter gif name or keywords..."
           />
@@ -51,7 +63,11 @@ const Search = () => {
       </div>
       {searchKeyword && loading ? <Loading /> : ""}
       {searchKeyword && !loading && (
-        <GifCotainer data={data} />
+        <><div className="text-black font-sans font-bold text-xl">
+        Your results for {`"${searchKeyword}"`}
+      </div>
+        <GifCotainer data={data.data} searchKey={searchKeyword} />
+        </>
       )}
     </div>
   );

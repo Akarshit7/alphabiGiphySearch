@@ -1,32 +1,32 @@
-import React from 'react'
-import Gifcard from './Gifcard'
+import React from "react";
+import Gifcard from "./Gifcard";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem } from "@/lib/store/favourites";
 
 const GifCotainer = ({data}) => {
+  const dispatch = useDispatch();
+  const addToFavorite = (item) => {
+    dispatch(addItem(item));
+  };
+  const removeFromFavourites = (item) => {
+    dispatch(removeItem(item));
+  };
   return (
-    <div className="flex justify-around h-96">
-          <Gifcard
-            title={"Bored Cat GIF"}
-            gifUrl={
-              "https://media3.giphy.com/media/mlvseq9yvZhba/giphy.gif?cid=a5a58d70b0sl62w5avvkkiuy2grqu3s2ov75065hbrzbxudq&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-            }
-            alt={""}
-          />
-          <Gifcard
-            title={"Bored Cat GIF"}
-            gifUrl={
-              "https://media2.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif?cid=a5a58d70b0sl62w5avvkkiuy2grqu3s2ov75065hbrzbxudq&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-            }
-            alt={""}
-          />
-          <Gifcard
-            title={"Bored Cat GIF"}
-            gifUrl={
-              "https://media2.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif?cid=a5a58d70b0sl62w5avvkkiuy2grqu3s2ov75065hbrzbxudq&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-            }
-            alt={""}
-          />
-        </div>
-  )
-}
+    <>
+      
+      <div className="flex flex-wrap justify-around min-h-96">
+        {data.map((item) => {
+          return (
+            <Gifcard
+              addToFavorite={addToFavorite}
+              removeFromFavourites={removeFromFavourites}
+              item={item}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
+};
 
-export default GifCotainer
+export default GifCotainer;

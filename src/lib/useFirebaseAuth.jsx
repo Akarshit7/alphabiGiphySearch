@@ -56,8 +56,8 @@ export default function useFirebaseAuth() {
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-  const logOut = () =>
-    signOut(auth).then(clear)
+  const logOut = () =>{
+    signOut(auth).then(clear)}
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
