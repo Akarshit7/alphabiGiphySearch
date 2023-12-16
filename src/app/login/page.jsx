@@ -42,7 +42,7 @@ const Login = () => {
       <div>
         <Toaster />
       </div>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-black">
         <h1 className="text-4xl mb-4">Login</h1>
         <hr />
         <label htmlFor="password">Email</label>
