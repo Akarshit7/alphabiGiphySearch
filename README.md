@@ -42,8 +42,8 @@ password : 12345678
 **1. Clone this repo by running the following command :-**
 
 ```bash
- git clone https://github.com/Akarshit7
- cd 
+ git clone https://github.com/Akarshit7/alphabiGiphySearch.git
+ cd alphabiGiphySearch
 ```
 
 **2. Now install all the required packages by running the following commands :-**
